@@ -24,7 +24,7 @@ const SideDrawer = ({ open = true, onToggleDrawer, variant }) => {
           button
           onClick={() => {
             setDarkMode((prevMode) => !prevMode);
-            onToggleDrawer(false)();
+            onToggleDrawer();
           }}
         >
           <ListItemText primary="Toggle Theme" />

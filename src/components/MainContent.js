@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { Select, MenuItem, FormControl, Typography, FormLabel, TextField } from '@mui/material';
+import { Select, MenuItem, FormControl, Typography, FormLabel } from '@mui/material';
 import { Pie, Bar } from 'react-chartjs-2';
 import DateSelector from './DateSelector';
 import {
@@ -15,6 +15,32 @@ import {
 import StatCard from './StatCard';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
+
+const styles = {
+  boxContainer: {
+    backgroundColor: '#262D47',
+    borderRadius: '10px',
+    boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
+    padding: '10px',
+  },
+  typographyHeader: {
+    marginBottom: '10px',
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  flexboxLayout: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  chartBoxContainer: {
+    width: '30%',
+    height: '500px',
+    backgroundColor: '#262D47',
+    borderRadius: '10px',
+    boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
+    padding: '10px',
+  },
+};
 
 const MainContent = () => {
   const [, setData] = useState([]);
@@ -246,12 +272,7 @@ const MainContent = () => {
   return (
     <div style={{ padding: '20px', backgroundColor: '#161a33' }}>
       <Box
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '20px',
-        }}
+        style={{ ...styles.flexboxLayout, alignItems: 'center', marginBottom: '20px' }}
       >
         <Typography variant="h5" style={{ fontWeight: 'bold', color: '#fff' }}>
           Sales Overview
@@ -299,82 +320,6 @@ const MainContent = () => {
             </Select>
           </FormControl>
 
-          {/* <FormControl
-            size="small"
-            sx={{
-              minWidth: 120,
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#fff',
-                },
-                '&:hover fieldset': {
-                  borderColor: '#fff',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#fff',
-                },
-              },
-              '& .MuiSvgIcon-root': {
-                color: '#fff',
-              },
-            }}
-          >
-            <FormLabel
-              component="legend"
-              style={{ marginBottom: '10px', color: '#fff' }}
-            >
-              Select From date
-            </FormLabel>
-            <TextField
-              type="date"
-              value={startDate}
-              onChange={(e) => handleStartDateChange(e.target.value)}
-              variant="outlined"
-              fullWidth
-              InputProps={{
-                style: { color: '#fff' },
-              }}
-            />
-          </FormControl>
-
-          <FormControl
-            size="small"
-            sx={{
-              minWidth: 120,
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#fff',
-                },
-                '&:hover fieldset': {
-                  borderColor: '#fff',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#fff',
-                },
-              },
-              '& .MuiSvgIcon-root': {
-                color: '#fff',
-              },
-            }}
-          >
-            <FormLabel
-              component="legend"
-              style={{ marginBottom: '10px', color: '#fff' }}
-            >
-              Select To date
-            </FormLabel>
-            <TextField
-              type="date"
-              value={endDate}
-              onChange={(e) => handleEndDateChange(e.target.value)}
-              variant="outlined"
-              fullWidth
-              InputProps={{
-                style: { color: '#fff' },
-              }}
-            />
-          </FormControl> */}
-
           <DateSelector
             label="Select From Date"
             value={startDate}
@@ -390,139 +335,27 @@ const MainContent = () => {
           />
         </Box>
       </Box>
-      {/* <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <div
-            style={{
-              width: '22%',
-              height: '150px',
-              backgroundColor: '#262D47',
-              borderRadius: '10px',
-              boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-        >
-          <div style={{ marginLeft: '30px' }}>
-            <img src="/Sales Icon.svg" alt="sales" style={{ width: '60px', height: '60px' }} />
-          </div>
-          <div style={{ marginLeft: '30px' }}>
-            <h3 style={{ textAlign: 'left', color: '#fff', margin: '10px 0' }}>Total Sales</h3>
-            <p style={{ textAlign: 'left', color: '#fff', marginTop: '8px' }}>{totalSales}</p>
-          </div>
-          </div>
-          <div
-            style={{
-              width: '22%',
-              height: '150px',
-              backgroundColor: '#262D47',
-              borderRadius: '10px',
-              boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-        >
-          <div style={{ marginLeft: '30px' }}>
-            <img src="/Quantity-Icon.svg" alt="Quantity" style={{ width: '60px', height: '60px' }} />
-          </div>
-          <div style={{ marginLeft: '30px' }}>
-            <h3 style={{ textAlign: 'left', color: '#fff', margin: '10px 0' }}>Quantity Sold</h3>
-            <p style={{ textAlign: 'left', color: '#fff', marginTop: '8px' }}>{quantity}</p>
-          </div>
-          </div>
-          <div
-            style={{
-              width: '22%',
-              height: '150px',
-              backgroundColor: '#262D47',
-              borderRadius: '10px',
-              boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-          <div style={{ marginLeft: '30px' }}>
-            <img src="/Discount-Icon.svg" alt="discount" style={{ width: '60px', height: '60px' }} />
-            </div>
-            <div style={{ marginLeft: '30px' }}>
-              <h3 style={{ textAlign: 'left', color: '#fff', margin: '10px 0' }}>Discount%</h3>
-              <p style={{ textAlign: 'left', color: '#fff', marginTop: '8px' }}>{discount}</p>
-            </div>
-          </div>
-          <div
-            style={{
-              width: '22%',
-              height: '150px',
-              backgroundColor: '#262D47',
-              borderRadius: '10px',
-              boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-              padding: '10px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-        >
-          <div style={{ marginLeft: '30px' }}>
-            <img src="/Profit-Icon.svg" alt="profit" style={{ width: '60px', height: '60px' }} />
-            </div>
-            <div style={{ marginLeft: '30px' }}>
-              <h3 style={{ textAlign: 'left', color: '#fff', margin: '10px 0' }}>Profit</h3>
-              <p style={{ textAlign: 'left', color: '#fff', marginTop: '8px' }}>{profit}</p>
-            </div>
-          </div>
-      </div> */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-        <StatCard
-          icon="/Sales Icon.svg"
-          title="Total Sales"
-          value={totalSales}
-        />
-        <StatCard
-          icon="/Quantity-Icon.svg"
-          title="Quantity Sold"
-          value={quantity}
-        />
-        <StatCard
-          icon="/Discount-Icon.svg"
-          title="Discount%"
-          value={discount}
-        />
-        <StatCard
-          icon="/Profit-Icon.svg"
-          title="Profit"
-          value={profit}
-        />
+
+      <div style={{ ...styles.flexboxLayout, marginBottom: '20px' }}>
+        <StatCard icon="/Sales Icon.svg" title="Total Sales" value={totalSales} />
+        <StatCard icon="/Quantity-Icon.svg" title="Quantity Sold" value={quantity} />
+        <StatCard icon="/Discount-Icon.svg" title="Discount%" value={discount} />
+        <StatCard icon="/Profit-Icon.svg" title="Profit" value={profit} />
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+      <div style={{ ...styles.flexboxLayout, marginTop: '20px' }}>
         <Box
-          style={{
-            width: '48%',
-            height: '430px',
-            backgroundColor: '#262D47',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-            padding: '10px',
-          }}
+          style={{ ...styles.boxContainer, width: '48%', height: '430px' }}
         >
-          <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#fff' }}>
+          <Typography variant="h6" style={styles.typographyHeader}>
             Sales by City
           </Typography>
           <Bar data={barChartData} options={barChartOptions} />
         </Box>
         <Box
-          style={{
-            width: '48%',
-            backgroundColor: '#262D47',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-            padding: '10px',
-            overflowY: 'auto',
-            height: '430px',
-          }}
+          style={{ ...styles.boxContainer, width: '48%', height: '430px', overflowY: 'auto' }}
         >
-          <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#fff' }}>
+          <Typography variant="h6" style={styles.typographyHeader}>
             Sales by Products
           </Typography>
           <TableContainer component={Paper}>
@@ -546,34 +379,15 @@ const MainContent = () => {
         </Box>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-        <Box
-          style={{
-            width: '30%',
-            height: '500px',
-            backgroundColor: '#262D47',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-            padding: '10px',
-          }}
-        >
+      <div style={{ ...styles.flexboxLayout, marginTop: '20px' }}>
+        <Box style={styles.chartBoxContainer}>
           <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#fff' }}>
             Sales by Category
           </Typography>
           <Pie data={pieChartData} options={pieChartOptions} />
         </Box>
 
-        <Box
-          style={{
-            width: '30%',
-            backgroundColor: '#262D47',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-            padding: '10px',
-            height: '500px',
-            overflowY: 'auto',
-          }}
-        >
+        <Box style={{ ...styles.chartBoxContainer, overflowY: 'auto' }}>
           <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#fff' }}>
             Sales by Sub-Category
           </Typography>
@@ -597,16 +411,7 @@ const MainContent = () => {
           </TableContainer>
         </Box>
 
-        <Box
-          style={{
-            width: '30%',
-            height: '500px',
-            backgroundColor: '#262D47',
-            borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0,0,0,0.1)',
-            padding: '10px',
-          }}
-        >
+        <Box style={styles.chartBoxContainer}>
           <Typography variant="h6" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#fff' }}>
             Sales by Segment
           </Typography>
